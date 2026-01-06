@@ -139,13 +139,24 @@ void hapusProduk(PengelolaUMKM &p) {
         return;
     }
 
-    if (!prev) p.firstProduk = curr->next;
-    else prev->next = curr->next;
+    char konfirmasi;
+    cout << "Yakin hapus produk \"" << curr->nama << "\"? (y/n): ";
+    cin >> konfirmasi;
+
+    if (konfirmasi != 'y' && konfirmasi != 'Y') {
+        cout << "Penghapusan dibatalkan.\n";
+        return;
+    }
+    if (!prev)
+        p.firstProduk = curr->next;
+    else
+        prev->next = curr->next;
 
     delete curr;
     rebuildGraphKategori(p);
     cout << "Produk berhasil dihapus!\n";
 }
+
 
 /* ================= TRANSAKSI ================= */
 void buatTransaksiBaru(PengelolaUMKM &p) {
