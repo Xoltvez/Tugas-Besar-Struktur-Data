@@ -3,6 +3,7 @@
 #include <map>
 
 
+
 void inisialisasiToko(PengelolaUMKM &p) {
     p.firstProduk = NULL;
     p.firstTransaksi = NULL;
@@ -33,7 +34,6 @@ void rebuildGraphKategori(PengelolaUMKM &p) {
     }
 }
 
-/* ================= PRODUK ================= */
 void tambahProduk(PengelolaUMKM &p) {
     Produk* baru = new Produk;
     baru->id = p.autoID++;
@@ -42,12 +42,29 @@ void tambahProduk(PengelolaUMKM &p) {
     cin.ignore();
     cout << "Nama Produk : ";
     getline(cin, baru->nama);
+
     cout << "Kategori    : ";
     getline(cin, baru->kategori);
+
     cout << "Harga       : ";
     cin >> baru->harga;
+    if (cin.fail()) {
+        cout << "Inputan harus angka!\n";
+        cin.clear();
+        cin.ignore(1000, '\n');
+        delete baru;
+        return;
+    }
+
     cout << "Stok        : ";
     cin >> baru->stok;
+    if (cin.fail()) {
+        cout << "Inputan harus angka!\n";
+        cin.clear();
+        cin.ignore(1000, '\n');
+        delete baru;
+        return;
+    }
 
     if (!p.firstProduk)
         p.firstProduk = baru;
@@ -60,6 +77,7 @@ void tambahProduk(PengelolaUMKM &p) {
     rebuildGraphKategori(p);
     cout << "Produk berhasil ditambahkan!\n";
 }
+
 
 void tampilkanSemuaProduk(PengelolaUMKM p) {
     Produk* t = p.firstProduk;
