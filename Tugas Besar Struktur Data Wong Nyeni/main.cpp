@@ -22,6 +22,14 @@ int main() {
         cout << "Pilih: ";
         cin >> pilih;
 
+        while (cin.fail()) {
+            cout << "Input menu harus angka! Silakan pilih ulang.\n";
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Pilih: ";
+            cin >> pilih;
+        }
+
         switch (pilih) {
         case 1: tambahProduk(toko); break;
         case 2: tampilkanSemuaProduk(toko); break;
