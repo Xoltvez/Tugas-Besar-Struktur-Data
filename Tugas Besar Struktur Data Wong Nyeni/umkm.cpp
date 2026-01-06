@@ -46,15 +46,27 @@ void tambahProduk(PengelolaUMKM &p) {
     cout << "Kategori    : ";
     getline(cin, baru->kategori);
 
+    string inputHarga;
     cout << "Harga       : ";
-    cin >> baru->harga;
-    if (cin.fail()) {
-        cout << "Inputan harus angka!\n";
-        cin.clear();
-        cin.ignore(1000, '\n');
-        delete baru;
+    getline(cin, inputHarga);
+
+
+    for (int i = 0; i < inputHarga.length(); i++) {
+        if (inputHarga[i] == '.')
+            inputHarga.erase(i--, 1);
+        }
+
+
+    for (char c : inputHarga) {
+        if (!isdigit(c)) {
+            cout << "Harga harus berupa angka!\n";
+            delete baru;
         return;
     }
+}
+
+baru->harga = stol(inputHarga);
+
 
     cout << "Stok        : ";
     cin >> baru->stok;
